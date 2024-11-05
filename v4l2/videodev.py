@@ -10,7 +10,7 @@ import os
 
 import v4l2.uapi
 
-__all__ = [ 'VideoDevice', 'VideoBuffer' ]
+__all__ = [ 'VideoDevice', 'VideoBuffer', 'CaptureStreamer' ]
 
 class VideoDevice:
     def __init__(self, dev_path: str) -> None:
