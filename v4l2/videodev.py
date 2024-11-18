@@ -325,7 +325,10 @@ class SPlaneCaptureStreamer(VideoCaptureStreamer):
         assert pix.pixelformat == self.format.v4l2_fourcc, f'{pix.pixelformat} != {self.format.v4l2_fourcc}'
         assert pix.width == self.width
         assert pix.height == self.height
-        assert pix.bytesperline == self.strides[0], f'{pix.bytesperline} != {self.strides[0]}'
+        # TODO: find better workaround
+        if pix.bytesperline != self.strides[0]:
+            print(f'WARNING - stride issue: {pix.bytesperline} != {self.strides[0]}')
+            self.strides[0] = pix.bytesperline
 
     def queue(self, vbuf: VideoBuffer):
         assert(vbuf in self.vbuffers)
